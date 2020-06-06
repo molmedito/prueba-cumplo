@@ -1,0 +1,1 @@
+export const GET_DOLAR_INFO = 'GET_DOLAR_INFO';
