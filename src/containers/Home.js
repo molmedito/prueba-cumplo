@@ -122,10 +122,12 @@ const Home = () => {
               </FormControl>
             </div>
           </div>
-          <div className="col">
-            <FormControl>
-              <button onClick={handleSubmit} className="btn btn-primary" type="submit" disabled={loading}>Obtener datos</button>
-            </FormControl>
+          <div className="d-flex justify-content-end mt-2">
+            <div className="col-4">
+              <FormControl>
+                <button onClick={handleSubmit} className="btn btn-primary" type="submit" disabled={loading}>Obtener datos</button>
+              </FormControl>
+            </div>
           </div>
         </div>
 
