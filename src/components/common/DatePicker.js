@@ -9,16 +9,19 @@ import moment from "moment";
 import "moment/locale/es";
 moment.locale("es");
 
+function disableWeekends(date) {
+    return date.getDay() === 0 || date.getDay() === 6;
+}
 
 const DatePicker = ({
     handleDateChange,
     date,
     type,
     format = 'DD/MM/YYYY',
-    minDate = null,
-    maxDate = minDate ? (new Date(`${new Date(minDate).getFullYear() + 2}/${new Date(minDate).getMonth() + 1}/${new Date(minDate).getDate()}`)) : (new Date(`${new Date().getFullYear() + 4}/${new Date().getMonth() + 1}/${new Date().getDate()}`)),
+    minDate = new Date(`${new Date().getFullYear() - 2}/${new Date().getMonth() + 1}/${new Date().getDate()}`),
+    maxDate = new Date(),
 }) => {
-    const aidi = `date-picker-${type}`;
+    const _id = `date-picker-${type}`;
     const invalidDateMessage = 'Formato de fecha inválido';
 
     const handleExternalDateChange = (date, type) => {
@@ -32,12 +35,13 @@ const DatePicker = ({
                 variant="inline"
                 margin="normal"
                 format={format}
-                id={aidi}
+                id={_id}
                 invalidDateMessage={invalidDateMessage}
                 disableToolbar
                 value={date}
+                shouldDisableDate={date => disableWeekends(date._d)}
 
-                minDate={minDate ? minDate : new Date(`${new Date().getFullYear() - 2}/${new Date().getMonth() + 1}/${new Date().getDate()}`)}
+                minDate={minDate}
                 minDateMessage={'No puedes poner una fecha menor a la mínima.'}
                 
                 maxDate={maxDate}

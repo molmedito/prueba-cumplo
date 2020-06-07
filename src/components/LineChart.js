@@ -4,18 +4,20 @@ import { Line } from 'react-chartjs-2';
 
 const makeNumberFromString = str => parseFloat(str.replace(/,/g,'.'));
 
-const LineChart = ({width, height, dolarValue}) => {
+const LineChart = ({width, height, dolarInfoList}) => {
   let dataset = [], labels = [];
 
-  if(dolarValue.length > 0){
-    for (let i = 0; i < dolarValue.length; i++) {
-      const dolar = dolarValue[i];
+  if(dolarInfoList.length > 0){
+    let totalDolar = 0;
+
+    for (let i = 0; i < dolarInfoList.length; i++) {
+      const dolar = dolarInfoList[i];
+
+      totalDolar = totalDolar + makeNumberFromString(dolar.Valor);
       
       dataset.push(makeNumberFromString(dolar.Valor));
       labels.push(dolar.Fecha);
     }
-
-    console.log(dataset)
 
     const data = (canvas) => {
       const ctx = canvas.getContext("2d");
@@ -75,6 +77,10 @@ const LineChart = ({width, height, dolarValue}) => {
           data={data} 
           options={options}
         />
+
+        <h1>Promedio: {`$${parseInt(totalDolar / dolarInfoList.length)}`}</h1>
+        <h1>Máximo: {`$${Math.max.apply(Math, dataset)}`}</h1>
+        <h1>Mínimo: {`$${Math.min.apply(Math, dataset)}`}</h1>
       </div>
     )
   } else {
