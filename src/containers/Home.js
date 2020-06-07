@@ -95,46 +95,50 @@ const Home = () => {
   }
 
   return (
-    <div className="dolar-chart">
-      <div className="dolar-filters">
-        <div className="col">
-          <FormControl>
-            <label>Fecha inicial</label>
-            <DatePicker
-                type={'dateStart'}
-                handleDateChange={handleDateChange}
-                date={dateStart}
-                maxDate={start}
-            />
-          </FormControl>
+    <div className="container">
+      <div className="row">
+        <div className="col-12 dolar-filters">
+          <div className="d-flex">
+            <div className="col-6">
+              <FormControl>
+                <label>Fecha inicial</label>
+                <DatePicker
+                    type={'dateStart'}
+                    handleDateChange={handleDateChange}
+                    date={dateStart}
+                    maxDate={start}
+                />
+              </FormControl>
+            </div>
+            <div className="col-6">
+              <FormControl>
+                <label>Fecha final</label>
+                <DatePicker
+                    type={'dateEnd'}
+                    handleDateChange={handleDateChange}
+                    date={dateEnd}
+                    maxDate={end}
+                />
+              </FormControl>
+            </div>
+          </div>
+          <div className="col">
+            <FormControl>
+              <button onClick={handleSubmit} className="btn btn-primary" type="submit" disabled={loading}>Obtener datos</button>
+            </FormControl>
+          </div>
         </div>
-        <div className="col">
-          <FormControl>
-            <label>Fecha final</label>
-            <DatePicker
-                type={'dateEnd'}
-                handleDateChange={handleDateChange}
-                date={dateEnd}
-                maxDate={end}
-            />
-          </FormControl>
-        </div>
-        <div className="col">
-          <FormControl>
-            <button onClick={handleSubmit} type="submit" disabled={loading}>Obtener datos</button>
-          </FormControl>
-        </div>
-      </div>
 
-      {loading ?
-        <div key={`loading`} className="loading">Cargando...</div>
-        :
-        [dolarInfoList.length > 1 ?
-          <LineChart key={`line_chart`} width={'100%'} height={400} dolarInfoList={dolarInfoList} />
+        {loading ?
+          <div key={`loading`} className="loading">Cargando...</div>
           :
-          <div key={`no_hay_datos`} className="no-data">No hay datos</div>
-        ]
-      }
+          [dolarInfoList.length > 1 ?
+            <LineChart key={`line_chart`} width={'100%'} height={400} dolarInfoList={dolarInfoList} />
+            :
+            <div key={`no_hay_datos`} className="no-data">No hay datos</div>
+          ]
+        }
+      </div>
     </div>
   )
 }
