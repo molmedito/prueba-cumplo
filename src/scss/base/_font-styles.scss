@@ -1,0 +1,74 @@
+h1, h2, h3, h4, h5, h6 {
+    display: inline-block;
+    font-weight: 600;
+}
+
+p, li,
+label, input, textarea, th, td {
+    margin: 0;
+    color: $txt-black !important;
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+small, strong, em, span {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+a {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    color: $txt-turquoise;
+    font-weight: 600;
+
+    &:hover, &:active {
+        color: $txt-turquoise;
+    }
+}
+
+h1 { font-size: 40px; }
+h2 { font-size: 32px; }
+h3 { font-size: 28px; }
+h4 { font-size: 24px; }
+h5 { font-size: 20px; }
+h6 { font-size: 16px; }
+
+
+.main-header {
+    h1, h2, h3, h4, h5, h6,
+    p, span, small, strong, em, li, label {
+        color: white;
+    }
+}
+.sidebar {
+    h1, h2, h3, h4, h5, h6,
+    p, span, small, strong, em, li, label,
+    a {
+        color: white;
+    }
+}
+
+//-------------------------------
+
+.link-opener {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: $txt-turquoise;
+    font-weight: 600;
+
+    &:hover, &:active {
+        color: $txt-turquoise;
+        text-decoration: underline;
+    }
+}
+
+.standard-text {
+    color: $txt-black !important;
+    font-family: 'Source Sans Pro', sans-serif !important;
+    font-size: 14px;
+
+    &.standard-text--bold {
+        font-weight: 600;
+    }
+}

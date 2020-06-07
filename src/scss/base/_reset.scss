@@ -1,0 +1,44 @@
+ul, li, figure {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+input, button {
+    &:focus {
+        outline: none;
+    }
+}
+
+.MuiToolbar-gutters {
+    padding-left: 0 !important;
+}
+.MuiTablePagination-spacer {
+    flex: 0 !important;
+}
+//.MuiTableContainer-root { overflow-x: unset !important; }
+
+.MuiPickersDay-dayDisabled {
+    p {
+        color: $txt-disabled !important;
+    }
+}
+
+.MuiPickersDay-current {
+    background-color: lighten($bg-blue, 20%) !important;
+
+    p {
+        color: white !important;
+    }
+}
+
+.MuiPickersDay-daySelected {
+    background-color: $bg-blue !important;
+
+    p {
+        color: white !important;
+    }
+}

@@ -1,0 +1,19 @@
+.btn {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+
+    &.btn-primary {
+        background-color: $bg-turquoise;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: darken($bg-turquoise, 10%) !important;
+        }
+        &:focus{
+            box-shadow: 0 0 0 0.2rem rgba(63, 131, 164, 0.5) !important;
+        }
+    }
+}

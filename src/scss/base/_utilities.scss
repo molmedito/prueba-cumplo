@@ -1,0 +1,37 @@
+.bd-grey {
+    border-bottom: 1px solid $bd-grey !important;
+}
+.bd-top-grey {
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 25px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $bd-grey;
+    }
+}
+
+.c-white {
+    color: white !important;
+}
+
+// Wrappers
+.main-content {
+    @media (min-width: 992px){
+        min-height: calc(100vh - 60px);
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    @media (max-width: 991px){
+        min-height: calc(100vh - 60px);
+    }
+}
+
+.preloader-wrapper {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+}
