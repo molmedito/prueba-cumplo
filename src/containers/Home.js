@@ -8,6 +8,7 @@ import { getDolarInfo } from '../actions/actions';
 import FormControl from '@material-ui/core/FormControl';
 
 // Components
+import Preloader from '../components/common/Preloader';
 import DatePicker from '../components/common/DatePicker';
 import LineChart from '../components/LineChart';
 
@@ -41,6 +42,7 @@ const Home = () => {
   const end = moment().day() === 0 ? reduceDays(moment(), 2) : (moment().day() === 6 ? reduceDays(moment(), 1) : moment());
   const start = reduceDays(end, 3).day() === 0 ? reduceDays(reduceDays(end, 3), 2) : (reduceDays(end, 3).day() === 6 ? reduceDays(reduceDays(end, 3), 1) : reduceDays(end, 3));
   // useState
+  const [valid, setValid] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
   const [dateStart, setDateStart] = React.useState(start);
   const [dateEnd, setDateEnd] = React.useState(end);
@@ -48,9 +50,11 @@ const Home = () => {
   const handleDateChange = (date, txt) => {
     switch (txt) {
         case 'dateStart':
+          setValid(true);
           setDateStart(date);
           break;
         case 'dateEnd':
+          setValid(true);
           setDateEnd(date);
           break;
     
@@ -81,13 +85,15 @@ const Home = () => {
       dispatch(getDolarInfo(startDate, endDate))
         .then(() => {
           setLoading(false);
+          setValid(false)
         });
-    } else if(new Date(dolarInfoList[0].Fecha).getTime() >  new Date(start).getTime() || new Date(dolarInfoList[dolarInfoList.length - 1].Fecha).getTime() < new Date(end).getTime()){
+    } else if(new Date(dolarInfoList[0].Fecha).getTime() !== new Date(start).getTime() || new Date(dolarInfoList[dolarInfoList.length - 1].Fecha).getTime() !== new Date(end).getTime()){
       setLoading(true);
       // Get dolar info
       dispatch(getDolarInfo(startDate, endDate))
         .then(() => {
           setLoading(false);
+          setValid(false)
         });
     } else {
       console.log('NO BUSCA')
@@ -97,9 +103,12 @@ const Home = () => {
   return (
     <div className="container">
       <div className="row">
+        <div className="col-12 title py-5">
+          <h1>Consulta valor dólar a peso chileno</h1>
+        </div>
         <div className="col-12 dolar-filters">
           <div className="d-flex">
-            <div className="col-6">
+            <div className="col-6 pl-0">
               <FormControl>
                 <label>Fecha inicial</label>
                 <DatePicker
@@ -110,7 +119,7 @@ const Home = () => {
                 />
               </FormControl>
             </div>
-            <div className="col-6">
+            <div className="col-6 pr-0">
               <FormControl>
                 <label>Fecha final</label>
                 <DatePicker
@@ -123,23 +132,27 @@ const Home = () => {
             </div>
           </div>
           <div className="d-flex justify-content-end mt-2">
-            <div className="col-4">
+            <div className="col-4 px-0">
               <FormControl>
-                <button onClick={handleSubmit} className="btn btn-primary" type="submit" disabled={loading}>Obtener datos</button>
+                <button onClick={handleSubmit} className="btn btn-primary" type="submit" disabled={!valid}>Obtener datos</button>
               </FormControl>
             </div>
           </div>
         </div>
 
-        {loading ?
-          <div key={`loading`} className="loading">Cargando...</div>
-          :
-          [dolarInfoList.length > 1 ?
-            <LineChart key={`line_chart`} width={'100%'} height={400} dolarInfoList={dolarInfoList} />
+        <div className="container">
+          {loading ?
+            <div className="preloader-wrapper">
+              <Preloader size={5} />
+            </div>
             :
-            <div key={`no_hay_datos`} className="no-data">No hay datos</div>
-          ]
-        }
+            [dolarInfoList.length > 1 ?
+              <LineChart key={`line_chart`} width={'100%'} height={400} dolarInfoList={dolarInfoList} />
+              :
+              <></>
+            ]
+          }
+        </div>
       </div>
     </div>
   )

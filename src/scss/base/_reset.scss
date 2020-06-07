@@ -27,8 +27,8 @@ input, button {
     }
 }
 
-.MuiPickersDay-current {
-    background-color: lighten($bg-blue, 20%) !important;
+.MuiPickersDay-current:not(.MuiPickersDay-dayDisabled) {
+    background-color: lighten($bg-green, 20%) !important;
 
     p {
         color: white !important;
@@ -36,7 +36,7 @@ input, button {
 }
 
 .MuiPickersDay-daySelected {
-    background-color: $bg-blue !important;
+    background-color: $bg-green !important;
 
     p {
         color: white !important;

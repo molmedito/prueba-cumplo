@@ -5,12 +5,12 @@
     border: none;
 
     &.btn-primary {
-        background-color: $bg-turquoise;
+        background-color: $bg-green;
 
         &:hover,
         &:active,
         &:focus {
-            background-color: darken($bg-turquoise, 10%) !important;
+            background-color: darken($bg-green, 10%) !important;
         }
         &:focus{
             box-shadow: 0 0 0 0.2rem rgba(63, 131, 164, 0.5) !important;

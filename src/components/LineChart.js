@@ -22,20 +22,20 @@ const LineChart = ({width, height, dolarInfoList}) => {
     const data = (canvas) => {
       const ctx = canvas.getContext("2d");
       const gradient = ctx.createLinearGradient(0, 0, 0, height);
-      gradient.addColorStop(0, 'rgba(250,174,50,1)');   
-      gradient.addColorStop(1, 'rgba(250,174,50,0)');
+      gradient.addColorStop(0, 'rgba(4, 101, 33, 1)');   
+      gradient.addColorStop(1, 'rgba(4, 101, 33, 0.2)');
 
       return {
         labels,
         datasets: [
           {
             backgroundColor : gradient,
-            borderColor : "#ff6c23",
+            borderColor : "rgb(3, 65, 22)",
             borderWidth: 2,
             pointColor : "#fff",
-            pointStrokeColor : "#ff6c23",
+            pointStrokeColor : "rgb(3, 65, 22)",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "#ff6c23",
+            pointHighlightStroke: "rgb(3, 65, 22)",
             hoverRadius: 8,
             pointRadius: 6,
             hoverBorderWidth: 2,
@@ -68,19 +68,25 @@ const LineChart = ({width, height, dolarInfoList}) => {
 
     const divStyle = {
       width: width,
-      height: height
     };
 
     return (
-      <div className="line-chart" style={divStyle}>
-        <Line 
-          data={data} 
-          options={options}
-        />
-
-        <h1>Promedio: {`$${parseInt(totalDolar / dolarInfoList.length)}`}</h1>
-        <h1>Máximo: {`$${Math.max.apply(Math, dataset)}`}</h1>
-        <h1>Mínimo: {`$${Math.min.apply(Math, dataset)}`}</h1>
+      <div className="row">
+        <div className="col-12 line-chart pb-4" style={divStyle}>
+          <Line 
+            data={data} 
+            options={options}
+          />
+        </div>
+        <div className="col-12">
+          <h4>Promedio: {`$${parseInt(totalDolar / dolarInfoList.length)}`}</h4>
+        </div>
+        <div className="col-12">
+          <h4>Máximo: {`$${Math.max.apply(Math, dataset)}`}</h4>
+        </div>
+        <div className="col-12">
+          <h4>Mínimo: {`$${Math.min.apply(Math, dataset)}`}</h4>
+        </div>
       </div>
     )
   } else {
